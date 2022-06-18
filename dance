@@ -1,0 +1,702 @@
+    local library = loadstring(game:HttpGet('https://raw.githubusercontent.com/sannin9000/Ui-Libraries/main/uwuware'))()
+local Window = library:CreateWindow("TypeHub")
+local folder = Window:AddFolder('Custom')
+local folder2 = Window:AddFolder('R6 Emotes')
+local folder3 = Window:AddFolder('R6 Emotes2')
+local folder4 = Window:AddFolder('R6 Emotes3')
+local folder5 = Window:AddFolder('R6 Emotes4')
+
+folder:AddBox({text = 'Animation Id', callback = function(v) 
+    getgenv().AnimId = v
+end})
+
+folder:AddButton({text = 'Play Animation', callback = function() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GelatekWasTaken/Reanimation.lua/main/Main/Main.lua"))()
+_G.ReanimationType = "PDeath"
+repeat wait() until _G.Reanimated == true
+local playanother = false
+local playing = false
+local rtrnv;
+local c;
+local tbl3;
+local v;
+local anim;
+local count;
+local hhhh;
+local asdf;
+local s;
+local animid;
+local plr;
+local char;
+local cframe;
+local torso;
+local rs;
+local ls;
+local rh;
+local lh;
+local n;
+local rj;
+local rsc0;
+local lsc0;
+local rhc0;
+local lhc0;
+local rjc0;
+local nc0;
+local gc0;
+local orsc0;
+local olsc0;
+local orhc0;
+local olhc0;
+local orjc0;
+local onc0;
+local count2;
+local maxcount2;
+local walking = false
+
+local function getnext(tbl,number)
+	c=100
+	rtrnv=0
+	for i,v in pairs(tbl) do
+		if i>number and i-number<c then
+			c=i-number
+			rtrnv=i
+		end
+	end
+	return(rtrnv)
+end
+local function wait2(tim)
+	if tim<0.1 then
+		game:GetService("RunService").Heartbeat:Wait()
+	else
+		for i=1,tim*40 do
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end
+end
+local function kftotbl(kf) -- Below this is literal pain..
+	tbl3 = {}
+	for i,v in pairs(kf:GetDescendants()) do
+		if v:IsA("Pose") then
+			tbl3[string.sub(v.Name,1,1)..string.sub(v.Name,#v.Name,#v.Name)] = v.CFrame
+		end
+	end
+	return(tbl3)
+end
+hhhh=game:GetService("Players").LocalPlayer.Character["Reanimate"].Humanoid.Animator
+hhhh.Parent = nil
+function Play(ID)
+	if playing == true then
+		s:Destroy()
+		playing = false
+		playanother = true
+	end
+	wait()
+	spawn(function()
+		if playanother == true then
+			playanother = false
+		end
+		playing = true
+		s = Instance.new("Sound", game:GetService("Players").LocalPlayer.Character["Reanimate"].Torso)
+		s.SoundId = "rbxassetid://"
+		s.Looped = true
+		s.Playing = true
+		wait(.1) -- Do not change because changing it will break.
+		animid="rbxassetid://".. ID
+		plr = game.Players.LocalPlayer
+		char = game:GetService("Players").LocalPlayer.Character["Reanimate"]
+		cframe = char.HumanoidRootPart.CFrame
+		torso = game:GetService("Players").LocalPlayer.Character["Reanimate"].Torso
+		-----------------------------------------------------------
+		rs = torso["Right Shoulder"] -- Just took this from another script(Faster).
+		ls = torso["Left Shoulder"]
+		rh = torso["Right Hip"]
+		lh = torso["Left Hip"]
+		n = torso["Neck"]
+		rj = game:GetService("Players").LocalPlayer.Character["Reanimate"].HumanoidRootPart["RootJoint"]
+		rsc0 = rs.C0
+		lsc0 = ls.C0
+		rhc0 = rh.C0
+		lhc0 = lh.C0
+		rjc0 = rj.C0
+		nc0 = n.C0
+		gc0 = CFrame.new()
+		orsc0 = rs.C0
+		olsc0 = ls.C0
+		orhc0 = rh.C0
+		olhc0 = lh.C0
+		orjc0 = rj.C0
+		onc0 = n.C0
+		count2 = 100
+		maxcount2=100
+		-----------------------------------------------------------
+		animid=game:GetObjects(animid)[1]
+		anim={}
+		for i,v in pairs(animid:GetChildren()) do
+			if v:IsA("Keyframe") then
+				anim[v.Time]=kftotbl(v)
+			end
+		end
+
+		count = 0
+		char=game:GetService("Players").LocalPlayer.Character["Reanimate"]
+
+		plr.CharacterRemoving:Connect(function()
+			if playing == true then
+				playing = false
+			end
+		end)
+
+		function LerpS(Weld, RadAngle, Time, Yield)
+			local Tween = game:GetService("TweenService")
+			local Z = Tween:Create(Weld, TweenInfo.new(Time), {Transform = RadAngle})
+			Z:Play()
+			if Yield then 
+				Z.Completed:Wait()
+			end
+		end
+
+		while wait() do
+			if playanother == true then
+				break
+			else
+				for i,oasjdadlasdkadkldjkl in pairs(anim) do
+					asdf=getnext(anim,count)
+					v=anim[asdf]
+					if v["Lg"] then
+						lhc0 = v["Lg"]
+					end
+					if v["Rg"] then
+						rhc0 = v["Rg"]
+					end
+					if v["Lm"] then
+						lsc0 = v["Lm"]
+					end
+					if v["Rm"] then
+						rsc0 = v["Rm"]
+					end
+					if v["To"] then
+						rjc0 = v["To"]
+					end
+					if v["Hd"] then
+						nc0 = v["Hd"]
+					end
+					count2=0
+					maxcount2=asdf-count
+					count=asdf
+					wait(asdf-count)
+					count2=maxcount2
+					if v["Lg"] then
+						LerpS(char.Torso["Left Hip"], v["Lg"], 0.05, false)
+					end
+					if v["Rg"] then
+						LerpS(char.Torso["Right Hip"], v["Rg"], 0.05, false)
+					end
+					if v["Lm"] then
+						LerpS(char.Torso["Left Shoulder"], v["Lm"], 0.05, false)
+					end
+					if v["Rm"] then
+						LerpS(char.Torso["Right Shoulder"], v["Rm"], 0.05, false)
+					end
+					if v["To"] then
+						LerpS(char.HumanoidRootPart["RootJoint"], v["To"], 0.05, false)
+					end
+					if v["Hd"] then
+						LerpS(char.Torso["Neck"], v["Hd"], 0.05, false)
+					end
+				end
+			end
+		end
+	end)
+end
+
+function Stop()
+	playing = false
+	playanother = true		
+	LerpS(char.Torso["Left Hip"], lhc0, 0, false)
+	LerpS(char.Torso["Right Hip"], rhc0, 0, false)
+	LerpS(char.Torso["Left Shoulder"], lsc0, 0, false)
+	LerpS(char.Torso["Right Shoulder"], rsc0, 0, false)
+	LerpS(char.HumanoidRootPart["RootJoint"], rjc0, 0, false)
+	LerpS(char.Torso["Neck"], nc0, 0, false)
+end
+Play(tonumber(getgenv().AnimId))
+end})
+
+function PlayFr(AnimId)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GelatekWasTaken/Reanimation.lua/main/Main/Main.lua"))()
+_G.ReanimationType = "PDeath"
+repeat wait() until _G.Reanimated == true
+local playanother = false
+local playing = false
+local rtrnv;
+local c;
+local tbl3;
+local v;
+local anim;
+local count;
+local hhhh;
+local asdf;
+local s;
+local animid;
+local plr;
+local char;
+local cframe;
+local torso;
+local rs;
+local ls;
+local rh;
+local lh;
+local n;
+local rj;
+local rsc0;
+local lsc0;
+local rhc0;
+local lhc0;
+local rjc0;
+local nc0;
+local gc0;
+local orsc0;
+local olsc0;
+local orhc0;
+local olhc0;
+local orjc0;
+local onc0;
+local count2;
+local maxcount2;
+local walking = false
+
+local function getnext(tbl,number)
+	c=100
+	rtrnv=0
+	for i,v in pairs(tbl) do
+		if i>number and i-number<c then
+			c=i-number
+			rtrnv=i
+		end
+	end
+	return(rtrnv)
+end
+local function wait2(tim)
+	if tim<0.1 then
+		game:GetService("RunService").Heartbeat:Wait()
+	else
+		for i=1,tim*40 do
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end
+end
+local function kftotbl(kf) -- Below this is literal pain..
+	tbl3 = {}
+	for i,v in pairs(kf:GetDescendants()) do
+		if v:IsA("Pose") then
+			tbl3[string.sub(v.Name,1,1)..string.sub(v.Name,#v.Name,#v.Name)] = v.CFrame
+		end
+	end
+	return(tbl3)
+end
+hhhh=game:GetService("Players").LocalPlayer.Character["Reanimate"].Humanoid.Animator
+hhhh.Parent = nil
+function Play(ID)
+	if playing == true then
+		s:Destroy()
+		playing = false
+		playanother = true
+	end
+	wait()
+	spawn(function()
+		if playanother == true then
+			playanother = false
+		end
+		playing = true
+		s = Instance.new("Sound", game:GetService("Players").LocalPlayer.Character["Reanimate"].Torso)
+		s.SoundId = "rbxassetid://"
+		s.Looped = true
+		s.Playing = true
+		wait(.1) -- Do not change because changing it will break.
+		animid="rbxassetid://".. ID
+		plr = game.Players.LocalPlayer
+		char = game:GetService("Players").LocalPlayer.Character["Reanimate"]
+		cframe = char.HumanoidRootPart.CFrame
+		torso = game:GetService("Players").LocalPlayer.Character["Reanimate"].Torso
+		-----------------------------------------------------------
+		rs = torso["Right Shoulder"] -- Just took this from another script(Faster).
+		ls = torso["Left Shoulder"]
+		rh = torso["Right Hip"]
+		lh = torso["Left Hip"]
+		n = torso["Neck"]
+		rj = game:GetService("Players").LocalPlayer.Character["Reanimate"].HumanoidRootPart["RootJoint"]
+		rsc0 = rs.C0
+		lsc0 = ls.C0
+		rhc0 = rh.C0
+		lhc0 = lh.C0
+		rjc0 = rj.C0
+		nc0 = n.C0
+		gc0 = CFrame.new()
+		orsc0 = rs.C0
+		olsc0 = ls.C0
+		orhc0 = rh.C0
+		olhc0 = lh.C0
+		orjc0 = rj.C0
+		onc0 = n.C0
+		count2 = 100
+		maxcount2=100
+		-----------------------------------------------------------
+		animid=game:GetObjects(animid)[1]
+		anim={}
+		for i,v in pairs(animid:GetChildren()) do
+			if v:IsA("Keyframe") then
+				anim[v.Time]=kftotbl(v)
+			end
+		end
+		
+		count = 0
+		char=game:GetService("Players").LocalPlayer.Character["Reanimate"]
+		
+		plr.CharacterRemoving:Connect(function()
+			if playing == true then
+				playing = false
+			end
+		end)
+		
+		function LerpS(Weld, RadAngle, Time, Yield)
+		local Tween = game:GetService("TweenService")
+        local Z = Tween:Create(Weld, TweenInfo.new(Time), {Transform = RadAngle})
+            Z:Play()
+            if Yield then 
+                Z.Completed:Wait()
+            end
+        end
+		
+		while wait() do
+			if playanother == true then
+				break
+			else
+				for i,oasjdadlasdkadkldjkl in pairs(anim) do
+					asdf=getnext(anim,count)
+					v=anim[asdf]
+					if v["Lg"] then
+						lhc0 = v["Lg"]
+					end
+					if v["Rg"] then
+						rhc0 = v["Rg"]
+					end
+					if v["Lm"] then
+						lsc0 = v["Lm"]
+					end
+					if v["Rm"] then
+						rsc0 = v["Rm"]
+					end
+					if v["To"] then
+						rjc0 = v["To"]
+					end
+					if v["Hd"] then
+						nc0 = v["Hd"]
+					end
+					count2=0
+					maxcount2=asdf-count
+					count=asdf
+					wait(asdf-count)
+					count2=maxcount2
+                    if v["Lg"] then
+						LerpS(char.Torso["Left Hip"], v["Lg"], 0.05, false)
+					end
+					if v["Rg"] then
+						LerpS(char.Torso["Right Hip"], v["Rg"], 0.05, false)
+					end
+					if v["Lm"] then
+						LerpS(char.Torso["Left Shoulder"], v["Lm"], 0.05, false)
+					end
+					if v["Rm"] then
+						LerpS(char.Torso["Right Shoulder"], v["Rm"], 0.05, false)
+					end
+					if v["To"] then
+						LerpS(char.HumanoidRootPart["RootJoint"], v["To"], 0.05, false)
+					end
+					if v["Hd"] then
+						LerpS(char.Torso["Neck"], v["Hd"], 0.05, false)
+					end
+				end
+			end
+		end
+	end)
+end
+
+function Stop()
+	playing = false
+	playanother = true		
+	LerpS(char.Torso["Left Hip"], lhc0, 0, false)
+	LerpS(char.Torso["Right Hip"], rhc0, 0, false)
+	LerpS(char.Torso["Left Shoulder"], lsc0, 0, false)
+	LerpS(char.Torso["Right Shoulder"], rsc0, 0, false)
+	LerpS(char.HumanoidRootPart["RootJoint"], rjc0, 0, false)
+	LerpS(char.Torso["Neck"], nc0, 0, false)
+end
+
+Play(AnimId)
+end
+
+folder2:AddButton({text = 'Cruisin', callback = function() 
+PlayFr(5079952034)
+end})
+
+folder2:AddButton({text = 'Peter Parker', callback = function() 
+PlayFr(9688597114)
+end})
+
+folder2:AddButton({text = 'Kazotsky', callback = function() 
+PlayFr(6816574330)
+end})
+
+folder2:AddButton({text = 'Gangnam Style', callback = function() 
+PlayFr(6816572217)
+end})
+
+folder2:AddButton({text = 'Billy Bounce', callback = function() 
+PlayFr(3381474830)
+end})
+
+folder2:AddButton({text = 'Orange Justice', callback = function() 
+PlayFr(3262592866)
+end})
+
+folder2:AddButton({text = 'Smug', callback = function() 
+PlayFr(3450125501)
+end})
+
+folder2:AddButton({text = 'Arm Shuffle', callback = function() 
+PlayFr(3607744332)
+end})
+
+folder2:AddButton({text = 'Boogie Down', callback = function() 
+PlayFr(3623215692)
+end})
+
+folder2:AddButton({text = 'Electro Shuffle', callback = function() 
+PlayFr(3619935462)
+end})
+
+folder2:AddButton({text = 'Crabby', callback = function() 
+PlayFr(3643129020)
+end})
+
+folder2:AddButton({text = 'Parrot', callback = function() 
+PlayFr(3656900015)
+end})
+
+folder2:AddButton({text = 'CaramellDansen', callback = function() 
+PlayFr(3690496479)
+end})
+
+folder2:AddButton({text = 'Praise The Lord', callback = function() 
+PlayFr(4776745048)
+end})
+
+folder2:AddButton({text = 'Billie Jean', callback = function() 
+PlayFr(4792883833)
+end})
+
+folder2:AddButton({text = 'Rick Roll', callback = function() 
+PlayFr(4459292790)
+end})
+
+folder2:AddButton({text = 'Conga', callback = function() 
+PlayFr(4572096542)
+end})
+
+folder3:AddButton({text = 'Anthony', callback = function() 
+PlayFr(4809145259)
+end})
+
+folder3:AddButton({text = 'Elctro Swing', callback = function() 
+PlayFr(4820078879)
+end})
+
+folder3:AddButton({text = 'Floss', callback = function() 
+PlayFr(4812941481)
+end})
+
+folder3:AddButton({text = 'Helicopter', callback = function() 
+PlayFr(4724894341)
+end})
+
+folder3:AddButton({text = 'Take The L', callback = function() 
+PlayFr(4827299133)
+end})
+
+folder3:AddButton({text = 'Aerostep', callback = function() 
+PlayFr(4776588732)
+end})
+
+folder3:AddButton({text = 'Skibidi', callback = function() 
+PlayFr(4835795413)
+end})
+
+folder3:AddButton({text = 'Spongebob', callback = function() 
+PlayFr(4896926493)
+end})
+
+folder3:AddButton({text = 'Rat', callback = function() 
+PlayFr(4746273203)
+end})
+
+folder3:AddButton({text = 'Blender', callback = function() 
+PlayFr(3534855146)
+end})
+
+folder3:AddButton({text = 'Reckless', callback = function() 
+PlayFr(3769807555)
+end})
+
+folder3:AddButton({text = 'Karate Moves', callback = function() 
+PlayFr(3882120151)
+end})
+
+folder3:AddButton({text = 'Cyber goth', callback = function() 
+PlayFr(3883926195)
+end})
+
+folder3:AddButton({text = 'Demonman', callback = function() 
+PlayFr(4764153637)
+end})
+
+folder3:AddButton({text = 'Pyro', callback = function() 
+PlayFr(4678151003)
+end})
+
+folder3:AddButton({text = 'Engineer', callback = function() 
+PlayFr(4677980227)
+end})
+
+folder4:AddButton({text = 'Spooky Month', callback = function() 
+PlayFr(4049304710)
+end})
+
+folder4:AddButton({text = 'Gang Torture', callback = function() 
+PlayFr(4109162757)
+end})
+
+folder4:AddButton({text = 'Radical', callback = function() 
+PlayFr(4686555525)
+end})
+
+folder4:AddButton({text = 'Carlton', callback = function() 
+PlayFr(4408536995)
+end})
+
+folder4:AddButton({text = 'Thriller', callback = function() 
+PlayFr(4846220052)
+end})
+
+folder4:AddButton({text = 'Loud Laugh', callback = function() 
+PlayFr(4846000379)
+end})
+
+folder4:AddButton({text = 'Carson Shearer', callback = function() 
+PlayFr(5806573931)
+end})
+
+folder4:AddButton({text = 'Drip', callback = function() 
+PlayFr(4959380041)
+end})
+
+folder4:AddButton({text = 'Running In Terror', callback = function() 
+PlayFr(4959380041)
+end})
+
+folder4:AddButton({text = 'Default Dance', callback = function() 
+PlayFr(4776575115)
+end})
+
+folder4:AddButton({text = 'Goopie Dance', callback = function() 
+PlayFr(5238669868)
+end})
+
+folder4:AddButton({text = 'Sea Shanties', callback = function() 
+PlayFr(4784189222)
+end})
+
+folder4:AddButton({text = 'JoJo Dance', callback = function() 
+PlayFr(4597906585)
+end})
+
+folder4:AddButton({text = 'Whip', callback = function() 
+PlayFr(4864629234)
+end})
+
+folder4:AddButton({text = 'Bomb Monkey', callback = function() 
+PlayFr(5159955624)
+end})
+
+folder4:AddButton({text = 'Freestlyin', callback = function() 
+PlayFr(4432024917)
+end})
+
+folder4:AddButton({text = 'Pogo', callback = function() 
+PlayFr(3053543383)
+end})
+
+folder4:AddButton({text = 'Snoop', callback = function() 
+PlayFr(4831391731)
+end})
+
+folder5:AddButton({text = 'Pem', callback = function() 
+PlayFr(9716801477)
+end})
+
+folder5:AddButton({text = 'Unlock', callback = function() 
+PlayFr(9716804124)
+end})
+
+folder5:AddButton({text = 'Lucio', callback = function() 
+PlayFr(9716806424)
+end})
+
+folder5:AddButton({text = 'Special', callback = function() 
+PlayFr(9716808975)
+end})
+
+folder5:AddButton({text = 'Destiny', callback = function() 
+PlayFr(9716810847)
+end})
+
+folder5:AddButton({text = 'Fly Dance', callback = function() 
+PlayFr(9716813897)
+end})
+
+folder5:AddButton({text = 'Skipping', callback = function() 
+PlayFr(9716822235)
+end})
+
+folder5:AddButton({text = 'Transendance', callback = function() 
+PlayFr(9716825589)
+end})
+
+folder5:AddButton({text = 'Dream Feet', callback = function() 
+PlayFr(9716832836)
+end})
+
+folder5:AddButton({text = 'Spasm', callback = function() 
+PlayFr(3383725246)
+end})
+
+folder5:AddButton({text = 'Casey', callback = function() 
+PlayFr(3442913250)
+end})
+
+folder5:AddButton({text = 'No Touchin', callback = function() 
+PlayFr(3414624197)
+end})
+
+folder5:AddButton({text = 'Intro', callback = function() 
+PlayFr(9762454212)
+end})
+
+folder5:AddButton({text = 'Groovin', callback = function() 
+PlayFr(9762458612)
+end})
+
+folder5:AddButton({text = 'Mario Beatbox', callback = function() 
+PlayFr(9762473795)
+end})
+
+library:Init()
